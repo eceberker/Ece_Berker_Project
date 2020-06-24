@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Ece_Berker_Project.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext <YorumluoUser>
     {
 
         public DbSet<Category> Categories { get; set; }
