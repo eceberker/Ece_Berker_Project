@@ -14,7 +14,7 @@ namespace Ece_Berker_Project.Models
         public string ContentText;
         public string UserName { get; set; }
 
-        public int Likes { get; set; }
+        public int? Likes { get; set; }
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public DateTime PostDate { get; set; }
