@@ -8,17 +8,10 @@ namespace Ece_Berker_Project.Models
 {
     public class YorumluoUser : IdentityUser
     {
-       
+        public string UserCode { get; set; }
+
         public DateTime BirthDay { get; set; }
         public string City { get; set; }
-
-    }
-    public class YorumluoUserRole : IdentityRole<int>
-    {
-        public bool CanLikeYorum { get; set; }
-        public bool CanEnterYorum { get; set; }
-        public bool CanAnswerYorum { get; set; }
-        public bool CanDeleteYorum { get; set; }
 
     }
 }

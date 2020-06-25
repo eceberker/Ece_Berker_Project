@@ -22,6 +22,12 @@ namespace Ece_Berker_Project.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+        }
 
         // GET: /<controller>/
         [HttpGet]
@@ -30,7 +36,7 @@ namespace Ece_Berker_Project.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> RegisterAsync(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -38,6 +44,8 @@ namespace Ece_Berker_Project.Controllers
                 var user = new YorumluoUser
                 {
                     UserName = model.Email,
+                    UserCode = model.UserCode,
+                    City = model.City,
                     Email = model.Email
                 };
 
@@ -58,6 +66,37 @@ namespace Ece_Berker_Project.Controllers
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
+            }
+
+            return View(model);
+        }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                
+                 
+
+                if (result.Succeeded)
+                {
+
+                    return RedirectToAction("index", "home");
+                }
+
+                // If there are any errors, add them to the ModelState object
+                // which will be displayed by the validation summary tag helper
+
+                    ModelState.AddModelError(string.Empty, "Geçersiz kullanıcı adı ya da şifre.");
+                
             }
 
             return View(model);
