@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<YorumluoUser> SignInManager
+@inject UserManager<YorumluoUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,33 +12,67 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Yorumluo</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Kategoriler</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Yorums" asp-action="Index">Yorumlar</a>
-                        </li>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
 
-                    </ul>
-                </div>
+            <a class="navbar-brand" asp-controller="home" asp-action="index">
+                <img src="~/img/y-logo.png" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+                Yorumluo
+            </a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar5">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse justify-content-center" id="navbar5">
+
+                <form class="ml-3 inline w-60  ">
+                    <div class="input-group">
+                        <input type="text" class="form-control border-right-0" placeholder="Arama Yap">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-primary btn btn-outline-light border-left-0" type="button">
+                                <img src="~/img/search.png" width="23" height="23" class="d-inline-block align-top" alt="" loading="lazy">
+                                
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
+            @if (SignInManager.IsSignedIn(User))
+
+            {
+                Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
+
+                var user = await GetCurrentUserAsync();
+
+                var displayName = user.UserCode;
+
+                <ul class="navbar-nav">
+                    <li class="nav-item active mx-1">
+                         <a class="nav-link text-light border border-white rounded" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @displayName</a>
+                        
+
+                       
+                    </li>
+                    <li class="nav-item active mx-1">
+                        <form class="form-inline" asp-controller="Account" asp-action="Logout">
+                            <button type="submit" class="nav-link btn btn-link text-light border">Çıkış Yap</button>
+                        </form>
+                    </li>
+                </ul>
+
+            }
+            else
+            {
+                <ul class="navbar-nav">
+                    <li class="nav-item active mx-1">
+                        <a class="nav-link border border-white rounded " asp-controller="Account" asp-action="Login">Giriş Yap<span class="sr-only">Home</span></a>
+                    </li>
+                    <li class="nav-item active mx-1">
+                        <a class="nav-link border border-white rounded" asp-controller="Account" asp-action="Register">Üye Ol</a>
+                    </li>
+                </ul>
+            }
         </nav>
+
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
