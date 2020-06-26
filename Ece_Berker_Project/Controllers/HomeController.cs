@@ -26,7 +26,10 @@ namespace Ece_Berker_Project.Controllers
         {
             return View();
         }
-
+        public IActionResult Feed()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();
@@ -50,5 +53,6 @@ namespace Ece_Berker_Project.Controllers
            // var user = _context.Users;
             return View();
         } 
+
     }
 }

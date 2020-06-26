@@ -23,6 +23,8 @@ namespace Ece_Berker_Project.Models
         {
             PostDate = DateTime.Now;
         }
+
+
     }
 
 }

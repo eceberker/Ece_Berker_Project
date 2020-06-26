@@ -57,7 +57,7 @@ namespace Ece_Berker_Project.Controllers
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("feed", "home");
                 }
 
                 // If there are any errors, add them to the ModelState object
@@ -89,7 +89,7 @@ namespace Ece_Berker_Project.Controllers
                 if (result.Succeeded)
                 {
 
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("feed", "home");
                 }
 
                 // If there are any errors, add them to the ModelState object

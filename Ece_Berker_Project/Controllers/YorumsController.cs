@@ -7,15 +7,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ece_Berker_Project.Controllers
 {
     public class YorumsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public YorumsController(ApplicationDbContext context)
+        private readonly UserManager<YorumluoUser> _userManager;
+        public YorumsController(UserManager<YorumluoUser> userManager, ApplicationDbContext context)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -59,6 +61,12 @@ namespace Ece_Berker_Project.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,UserName,Likes,CategoryId,PostDate")] Yorum yorum)
         {
+            Task<YorumluoUser> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
+
+            var user = await GetCurrentUserAsync();
+
+          
+            yorum.UserName = user.UserCode;
             yorum.PostDate = DateTime.Now;
             if (ModelState.IsValid)
             {

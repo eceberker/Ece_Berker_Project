@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Ece_Berker_Project.ViewModel
 {
-    public class SearchViewModel
+    public class ProfileViewModel
     {
-        public string SearchText { get; set; }
-        
+        public string UserCode { get; set; }
+
 
     }
 }

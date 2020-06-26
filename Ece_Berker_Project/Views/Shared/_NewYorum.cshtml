@@ -1,0 +1,41 @@
+﻿@model Ece_Berker_Project.Models.Yorum
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<div class="container border border-dark rounded m-2 p-4 bg-light">
+    <form asp-controller="Yorums" asp-action="Create" >
+        <div class="row">
+            <div class="col-md-8 mt-2">
+                <input type="text" class="form-control p-2" width="50" height="100" asp-for="Title" placeholder="Yorum..">
+            </div>
+            <div class="dropdown show col-md-2 mt-2">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kategori Seç
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                    @await Component.InvokeAsync("CategoryViewComponent")
+                </div>
+            </div>
+            <input type="hidden" asp-for="CategoryId" value="" />
+            <div class="form-group mt-2 ml-0">
+                <button type="Submit" class="btn btn-primary" formmethod="post" asp-controller="Yorums" asp-action="Create">Yorumla</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function SetCategoryId(id) {
+
+        document.getElementsById("CategoryId").values = id;
+    }
+
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
