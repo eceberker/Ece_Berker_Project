@@ -9,6 +9,7 @@ using Ece_Berker_Project.Models;
 using Ece_Berker_Project.ViewModel;
 using Ece_Berker_Project.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -26,6 +27,7 @@ namespace Ece_Berker_Project.Controllers
         {
             return View();
         }
+        [Authorize]
         public IActionResult Feed()
         {
             return View();
@@ -40,19 +42,7 @@ namespace Ece_Berker_Project.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public async Task<IActionResult> Search()
-        {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-            return View();
-        }
-        [HttpPost]
-        public async Task<IActionResult> Search(SearchViewModel searchModel)
-        {
-            var title = searchModel.SearchText;
-            var yorum = _context.Yorums;
-           // var user = _context.Users;
-            return View();
-        } 
+
 
     }
 }

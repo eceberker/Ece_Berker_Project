@@ -1,14 +1,7 @@
 ﻿@model IEnumerable<Ece_Berker_Project.Models.Yorum>
 
-@{
-    ViewData["Title"] = "Anasayfa";
-}
-
-<h1></h1>
-
 <p>
-    @Html.Partial("_NewYorum", new Ece_Berker_Project.Models.Yorum())
-    
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>

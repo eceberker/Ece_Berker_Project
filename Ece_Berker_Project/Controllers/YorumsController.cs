@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -24,7 +24,8 @@ namespace Ece_Berker_Project.Controllers
         // GET: Yorums
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Yorums.Include(y => y.Category);
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            var applicationDbContext = _context.Yorums.Include(y => y.Category).OrderByDescending(p=>p.PostDate);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -46,7 +47,7 @@ namespace Ece_Berker_Project.Controllers
 
             return View(yorum);
         }
-
+        [Authorize]
         // GET: Yorums/Create
         public IActionResult Create()
         {
@@ -58,6 +59,7 @@ namespace Ece_Berker_Project.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,UserName,Likes,CategoryId,PostDate")] Yorum yorum)
         {
@@ -65,7 +67,7 @@ namespace Ece_Berker_Project.Controllers
 
             var user = await GetCurrentUserAsync();
 
-          
+            
             yorum.UserName = user.UserCode;
             yorum.PostDate = DateTime.Now;
             if (ModelState.IsValid)
@@ -79,6 +81,7 @@ namespace Ece_Berker_Project.Controllers
         }
 
         // GET: Yorums/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -99,6 +102,7 @@ namespace Ece_Berker_Project.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,UserName,Likes,CategoryId,PostDate")] Yorum yorum)
         {
@@ -132,6 +136,8 @@ namespace Ece_Berker_Project.Controllers
         }
 
         // GET: Yorums/Delete/5
+        [Authorize]
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -152,6 +158,7 @@ namespace Ece_Berker_Project.Controllers
 
         // POST: Yorums/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

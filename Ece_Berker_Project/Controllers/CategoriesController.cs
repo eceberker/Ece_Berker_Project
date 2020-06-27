@@ -22,6 +22,7 @@ namespace Ece_Berker_Project.Controllers
         // GET: Categories
         public async Task<IActionResult> Index()
         {
+            
             return View(await _context.Categories.ToListAsync());
         }
 

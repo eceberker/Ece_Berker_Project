@@ -10,12 +10,16 @@ namespace Ece_Berker_Project.Models
     {
         public int Id { get; set; }
         [StringLength(50, MinimumLength = 3)]
+        [Display(Name = "Yorum")]
         public string Title { get; set; }
         public string ContentText;
+        [Display(Name = "Kullanıcı Adı")]
         public string UserName { get; set; }
 
+        
         public int? Likes { get; set; }
         public int CategoryId { get; set; }
+        [Display(Name = "Kategori Adı")]
         public Category Category { get; set; }
         public DateTime PostDate { get; set; }
         public virtual List<Answer> Answers { get; set; }
