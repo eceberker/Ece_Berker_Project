@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ece_Berker_Project.Data;
+using Ece_Berker_Project.Data.Migrations;
 using Ece_Berker_Project.Models;
 using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Identity;
@@ -15,12 +17,14 @@ namespace Ece_Berker_Project.Controllers
     {
         private readonly UserManager<YorumluoUser> userManager;
         private readonly SignInManager<YorumluoUser> signInManager;
-
+        private readonly ApplicationDbContext _context;
         public AccountController(UserManager<YorumluoUser> userManager,
-            SignInManager<YorumluoUser> signInManager)
+            SignInManager<YorumluoUser> signInManager,
+            ApplicationDbContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            _context = context;
         }
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -101,5 +105,31 @@ namespace Ece_Berker_Project.Controllers
 
             return View(model);
         }
+
+
+        [HttpGet]
+        public IActionResult Manage()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Manage(ProfileViewModel model,string Bio)
+        {
+            var user = await userManager.GetUserAsync(User);
+
+            model.Bio = user.Bio;
+
+            if (ModelState.IsValid)
+            {
+                _context.Update(Bio);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("index","yorums");
+
+            }
+
+            return View(model);
+        }
+
+
     }
 }

@@ -10,6 +10,7 @@ namespace Ece_Berker_Project.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Yorum> Yorums { get; set; }
         public DbSet<Answer> Answers { get; set; }
+        public DbSet<YorumluoUser> YorumluoUsers { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

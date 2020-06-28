@@ -9,7 +9,7 @@ namespace Ece_Berker_Project.ViewModel
     {
         public string UserId { get; set; }
         public string UserCode { get; set; }
-
+        public string Bio { get; set; }
         public string City { get; set; }
         public List<Models.Yorum> Yorumlar { get; set; }
     }

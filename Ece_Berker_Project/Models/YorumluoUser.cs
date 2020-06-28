@@ -12,6 +12,7 @@ namespace Ece_Berker_Project.Models
 
         public DateTime BirthDay { get; set; }
         public string City { get; set; }
+        public string Bio { get; set; }
         public virtual List<Yorum> Yorums { get; set; }
     }
 }
