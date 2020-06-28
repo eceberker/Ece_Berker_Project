@@ -1,4 +1,7 @@
 ﻿@model IEnumerable<Ece_Berker_Project.Models.Yorum>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<YorumluoUser> SignInManager
+@inject UserManager<YorumluoUser> UserManager
 
 @{
     ViewData["Title"] = "Anasayfa";
@@ -38,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-               <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> @Html.DisplayFor(modelItem => item.UserName)</a>
+                <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> @Html.DisplayFor(modelItem => item.UserName)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Likes)
@@ -49,11 +52,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PostDate)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            @if ( SignInManager.IsSignedIn(User)) {
+                Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
+
+                var user = await GetCurrentUserAsync();
+
+                if (user.UserCode == item.UserName) { 
+                <td>
+
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+
+                </td>
+                }
+            }
         </tr>
 }
     </tbody>
