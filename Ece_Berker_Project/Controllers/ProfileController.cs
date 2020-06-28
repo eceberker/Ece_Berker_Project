@@ -31,29 +31,6 @@ namespace Ece_Berker_Project.Controllers
             _userService = userService;
         }
 
-        //  public async Task<IActionResult> Index(int username)
-        //{
-
-        //  if (username == null)
-        //{
-        //  return NotFound();
-        //}
-
-        //  YorumluoUser user = await userManager.FindByIdAsync(username);
-
-        //    YorumluoUser user = await userManager.GetUserAsync(User);
-        //
-        //    {
-        //  return NotFound();
-        //  }
-
-        //return View(user);
-
-
-
-        // }
-
-
         public IActionResult Details(string id)
         {
             YorumluoUser user = _userService.GetById(id);
@@ -61,7 +38,7 @@ namespace Ece_Berker_Project.Controllers
             {
                 UserId = user.Id,
                UserCode = user.UserCode,
-            
+               
             };
             return View(model);
 

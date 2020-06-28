@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Ece_Berker_Project.Models.Yorum>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+
+    </tr>
+}

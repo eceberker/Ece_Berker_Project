@@ -8,3 +8,21 @@
 
 <h1>@Model.UserCode</h1>
 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yorumlar)
+            </th>
+
+            
+        </tr>
+    </thead>
+    <tbody>
+        @await Component.InvokeAsync("YorumViewComponent", Model.UserCode)
+       
+    </tbody>
+</table>

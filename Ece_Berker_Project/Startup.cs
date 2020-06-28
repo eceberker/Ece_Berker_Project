@@ -40,6 +40,8 @@ namespace Ece_Berker_Project
 
             services.Configure<IdentityOptions>(options =>
             {
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedAccount = false;
                 // Password settings.
                 options.Password.RequireDigit = false;
                 options.Password.RequireLowercase = false;

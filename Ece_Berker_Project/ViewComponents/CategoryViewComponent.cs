@@ -12,6 +12,7 @@ namespace Ece_Berker_Project.ViewComponents
     public partial class CategoryViewComponent : ViewComponent
     {
         private readonly ApplicationDbContext context;
+
         public CategoryViewComponent(ApplicationDbContext context)
         {
             this.context = context;
