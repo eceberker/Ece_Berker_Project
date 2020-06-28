@@ -23,7 +23,7 @@ namespace Ece_Berker_Project.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync(string id)
         {
             YorumluoUser user = _userService.GetById(id);
-            var yors = await _context.Yorums.Where(y=>y.UserName == user.UserCode).ToListAsync();
+            var yors = await _context.Yorums.Where(y=>y.UserName == user.UserCode).Include(y=>y.Category).OrderByDescending(p => p.PostDate).ToListAsync();
             return View(yors);
         }
     }

@@ -12,17 +12,15 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.UserCode)
+                Yorum 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Yorumlar)
+               Kategori Adı
             </th>
 
-            
         </tr>
     </thead>
     <tbody>
         @await Component.InvokeAsync("YorumViewComponent", Model.UserCode)
-       
     </tbody>
 </table>
