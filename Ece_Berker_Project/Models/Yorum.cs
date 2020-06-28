@@ -23,6 +23,7 @@ namespace Ece_Berker_Project.Models
         public Category Category { get; set; }
         public DateTime PostDate { get; set; }
         public virtual List<Answer> Answers { get; set; }
+        public virtual YorumluoUser User { get; set; }
         public Yorum()
         {
             PostDate = DateTime.Now;

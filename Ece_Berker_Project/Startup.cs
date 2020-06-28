@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ece_Berker_Project.Models;
+using Ece_Berker_Project.Service;
 
 namespace Ece_Berker_Project
 {
@@ -35,6 +36,7 @@ namespace Ece_Berker_Project
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddScoped<IApplicationUser, ApplicationUserService>();
 
             services.Configure<IdentityOptions>(options =>
             {
