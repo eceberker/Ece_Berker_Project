@@ -8,6 +8,7 @@ using Ece_Berker_Project.Models;
 using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,6 +19,7 @@ namespace Ece_Berker_Project.Controllers
         private readonly UserManager<YorumluoUser> userManager;
         private readonly SignInManager<YorumluoUser> signInManager;
         private readonly ApplicationDbContext _context;
+        
         public AccountController(UserManager<YorumluoUser> userManager,
             SignInManager<YorumluoUser> signInManager,
             ApplicationDbContext context)
@@ -25,6 +27,7 @@ namespace Ece_Berker_Project.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
             _context = context;
+           
         }
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -108,23 +111,26 @@ namespace Ece_Berker_Project.Controllers
 
 
         [HttpGet]
-        public IActionResult Manage()
+        public async Task<IActionResult> Manage(ProfileViewModel model)
         {
-            return View();
+            var user = await userManager.GetUserAsync(User);
+            return View(model);
         }
         [HttpPost]
         public async Task<IActionResult> Manage(ProfileViewModel model,string Bio)
         {
             var user = await userManager.GetUserAsync(User);
+          
 
             model.Bio = user.Bio;
+            
 
             if (ModelState.IsValid)
             {
-                _context.Update(Bio);
+                _context.Update(user);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("index","yorums");
-
+                
             }
 
             return View(model);
