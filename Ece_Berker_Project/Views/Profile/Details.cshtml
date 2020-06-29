@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model Ece_Berker_Project.ViewModel.ProfileViewModel
 @inject UserManager<YorumluoUser> UserManager
+@inject SignInManager<YorumluoUser> SignInManager
 @{
     ViewData["Title"] = "Details";
 
@@ -16,7 +17,7 @@
                 <h3 class="mb-0">
                     <a class="text-dark" href="#">@Model.UserCode</a>
                 </h3>
-                
+
                 <p class="card-text mb-auto">@Model.Bio</p>
 
             </div>
@@ -24,7 +25,20 @@
         </div>
     </div>
 </div>
+<div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
 
+        var user = await GetCurrentUserAsync();
+
+        if (user.UserCode == Model.UserCode)
+        {
+            @Html.Partial("_NewYorum", new Ece_Berker_Project.Models.Yorum())
+        }
+    }
+
+</div>
 <table class="table">
     <tbody>
         @await Component.InvokeAsync("YorumViewComponent", Model.UserCode)

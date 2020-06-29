@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Data.Migrations;
 using Ece_Berker_Project.Models;
 using Ece_Berker_Project.ViewModel;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -19,15 +21,22 @@ namespace Ece_Berker_Project.Controllers
         private readonly UserManager<YorumluoUser> userManager;
         private readonly SignInManager<YorumluoUser> signInManager;
         private readonly ApplicationDbContext _context;
-        
+        private readonly IWebHostEnvironment hostEnvironment;
+        private readonly IApplicationUser _userService;
+
+
         public AccountController(UserManager<YorumluoUser> userManager,
             SignInManager<YorumluoUser> signInManager,
-            ApplicationDbContext context)
+            ApplicationDbContext context,
+            IWebHostEnvironment hostEnvironment,
+            IApplicationUser userService)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             _context = context;
-           
+            this.hostEnvironment = hostEnvironment;
+            _userService = userService;
+
         }
         [HttpPost]
         public async Task<IActionResult> Logout()
@@ -119,15 +128,15 @@ namespace Ece_Berker_Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Manage(ProfileViewModel model,string Bio)
         {
-            var user = await userManager.GetUserAsync(User);
-          
 
-            model.Bio = user.Bio;
-            
 
             if (ModelState.IsValid)
             {
-                _context.Update(user);
+
+                var user = await userManager.GetUserAsync(User);               
+                user.Bio = model.Bio;
+               user = _userService.Update(user);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction("index","yorums");
                 
@@ -135,7 +144,36 @@ namespace Ece_Berker_Project.Controllers
 
             return View(model);
         }
+        [HttpGet]
+       public async Task<IActionResult> UploadImage()
+        {
+            var user = await userManager.GetUserAsync(User);
+            return View(user);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult> UploadImage (ProfileViewModel model)
+        {
+            var user = await userManager.GetUserAsync(User);
+            if (model.ImageFile != null)
+            {
+                string uniqueFileName = null;
+                string uploadsFolder = Path.Combine(hostEnvironment.WebRootPath, "img");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ImageFile.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                model.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
+                user.PhotoPath = uniqueFileName;
+              
 
+            }
+            ProfileImage profileImage = new ProfileImage();
+
+            profileImage.FileName = user.PhotoPath;
+            _context.ProfileImages.Add(profileImage);
+            await _context.SaveChangesAsync();
+
+           
+            return RedirectToAction("Details", "Profile", new { @id = user.UserCode });
+        }
     }
 }

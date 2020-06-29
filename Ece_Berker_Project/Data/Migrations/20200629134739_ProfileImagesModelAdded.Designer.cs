@@ -4,14 +4,16 @@ using Ece_Berker_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ece_Berker_Project.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200629134739_ProfileImagesModelAdded")]
+    partial class ProfileImagesModelAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -167,7 +169,7 @@ namespace Ece_Berker_Project.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PhotoPath")
+                    b.Property<string>("PhotoName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SecurityStamp")
@@ -343,7 +345,7 @@ namespace Ece_Berker_Project.Data.Migrations
             modelBuilder.Entity("Ece_Berker_Project.Models.ProfileImage", b =>
                 {
                     b.HasOne("Ece_Berker_Project.Models.YorumluoUser", "User")
-                        .WithMany("ProfileImages")
+                        .WithMany()
                         .HasForeignKey("UserId1");
                 });
 

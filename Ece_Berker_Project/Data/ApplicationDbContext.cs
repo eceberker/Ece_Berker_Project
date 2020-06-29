@@ -11,6 +11,7 @@ namespace Ece_Berker_Project.Data
         public DbSet<Yorum> Yorums { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<YorumluoUser> YorumluoUsers { get; set; }
+        public DbSet <ProfileImage> ProfileImages { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {

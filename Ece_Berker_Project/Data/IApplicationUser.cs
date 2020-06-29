@@ -1,7 +1,9 @@
 ﻿using Ece_Berker_Project.Models;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Ece_Berker_Project.Data
@@ -10,6 +12,7 @@ namespace Ece_Berker_Project.Data
     {
         YorumluoUser GetById(string id);
         IEnumerable<YorumluoUser> GetAll();
-        
+        YorumluoUser Update(YorumluoUser updatedUser);
+       
     }
 }

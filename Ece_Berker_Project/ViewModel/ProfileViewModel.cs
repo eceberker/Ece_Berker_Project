@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Ece_Berker_Project.ViewModel
         public string UserCode { get; set; }
         public string Bio { get; set; }
         public string City { get; set; }
+        public IFormFile ImageFile { get; set; }
         public List<Models.Yorum> Yorumlar { get; set; }
     }
 }
