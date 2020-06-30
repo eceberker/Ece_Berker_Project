@@ -167,7 +167,8 @@ namespace Ece_Berker_Project.Controllers
 
             }
             ProfileImage profileImage = new ProfileImage();
-
+            
+            profileImage.User = user;
             profileImage.FileName = user.PhotoPath;
             _context.ProfileImages.Add(profileImage);
             await _context.SaveChangesAsync();

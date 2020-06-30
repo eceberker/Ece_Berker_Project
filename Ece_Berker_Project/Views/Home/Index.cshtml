@@ -27,6 +27,9 @@
             color: #000;
             margin-top: 10px;
         }
+        h5 {
+            font-size: 1.4rem;
+        } 
     </style>
 
     <div class="container col-md-12 p-4 ">
@@ -38,8 +41,9 @@
                 <p></p>
             </div>
             <div class="col-sm-6">
-                <h2>Üye Girişi</h2>
+
                 <p>Birçok konuda yorum yapmak ve insanların yorumlarını görmek için üye girişi yap ya da üye ol.</p>
+                <h5>Üye Girişi</h5>
                 @Html.Partial("Login", new Ece_Berker_Project.ViewModel.LoginViewModel())
             </div>
         </div>

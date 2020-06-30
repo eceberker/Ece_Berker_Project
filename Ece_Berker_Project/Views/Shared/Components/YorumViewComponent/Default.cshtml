@@ -32,8 +32,9 @@
         {
 
 
+            var url = item.User.PhotoPath;
             <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/" data-holder-rendered="true">
+                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/@url" data-holder-rendered="true">
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                     <strong class="d-block text-gray-dark">@item.UserName</strong>
                     <span class="badge badge-primary category-name">@item.Category.Name</span>

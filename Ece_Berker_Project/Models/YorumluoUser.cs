@@ -8,6 +8,7 @@ namespace Ece_Berker_Project.Models
 {
     public class YorumluoUser : IdentityUser
     {
+        
         public string UserCode { get; set; }
 
         public DateTime BirthDay { get; set; }

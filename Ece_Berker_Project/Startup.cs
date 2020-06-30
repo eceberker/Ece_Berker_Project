@@ -51,9 +51,10 @@ namespace Ece_Berker_Project
                 options.Password.RequiredUniqueChars = 0;
 
                 // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(11);
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
                 options.Lockout.MaxFailedAccessAttempts = 5;
                 options.Lockout.AllowedForNewUsers = true;
+                
 
                 // User settings.
                 options.User.AllowedUserNameCharacters =

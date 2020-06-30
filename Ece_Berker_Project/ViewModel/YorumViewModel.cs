@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ece_Berker_Project.Models;
+using Microsoft.Extensions.Configuration.UserSecrets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,9 +9,10 @@ namespace Ece_Berker_Project.ViewModel
 {
     public class YorumViewModel
     {
-        public string Title { get; set; }
-        public int CategoryId { get; set; }
-        public string PostUser { get; set; }
+
+        public int UserId { get; set; }
+        public Yorum Yorum { get; set; }
+        
       
 
     }

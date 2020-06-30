@@ -16,7 +16,6 @@ namespace Ece_Berker_Project.Models
         [Display(Name = "Kullanıcı Adı")]
         public string UserName { get; set; }
 
-        
         public int? Likes { get; set; }
         public int CategoryId { get; set; }
         [Display(Name = "Kategori Adı")]

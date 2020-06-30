@@ -66,15 +66,24 @@ namespace Ece_Berker_Project.Controllers
         {
             Task<YorumluoUser> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
-            var user = await GetCurrentUserAsync();
+            
 
-            yorum.UserName = user.UserCode;
-            yorum.PostDate = DateTime.Now;
-          
+     
+            
 
             if (ModelState.IsValid)
             {
-                _context.Add(yorum);
+                var user = await GetCurrentUserAsync();
+                Yorum yor = new Yorum
+                {
+                    UserName = user.UserCode,
+                    CategoryId = yorum.CategoryId,
+                    Title = yorum.Title,
+                    PostDate = DateTime.Now,
+                    User = user,
+                };
+
+                _context.Add(yor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
