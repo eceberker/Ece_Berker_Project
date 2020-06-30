@@ -10,7 +10,7 @@ namespace Ece_Berker_Project.ViewModel
         public string Title { get; set; }
         public int CategoryId { get; set; }
         public string PostUser { get; set; }
-        public List<Models.Yorum> Yorumlar { get; set; }
+      
 
     }
 }

@@ -8,6 +8,7 @@ using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Ece_Berker_Project.ViewModel;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -61,15 +62,16 @@ namespace Ece_Berker_Project.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,UserName,Likes,CategoryId,PostDate")] Yorum yorum)
+        public async Task<IActionResult> Create([Bind("Id,Title,UserName,Likes,CategoryId,PostDate,User")] Yorum yorum)
         {
             Task<YorumluoUser> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
             var user = await GetCurrentUserAsync();
 
-            
             yorum.UserName = user.UserCode;
             yorum.PostDate = DateTime.Now;
+          
+
             if (ModelState.IsValid)
             {
                 _context.Add(yorum);

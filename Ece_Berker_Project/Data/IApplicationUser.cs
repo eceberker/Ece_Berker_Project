@@ -13,6 +13,7 @@ namespace Ece_Berker_Project.Data
         YorumluoUser GetById(string id);
         IEnumerable<YorumluoUser> GetAll();
         YorumluoUser Update(YorumluoUser updatedUser);
-       
+      
+            
     }
 }

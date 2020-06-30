@@ -5,42 +5,54 @@
 
 
 
-
-@if (SignInManager.IsSignedIn(User))
-{
-    Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
-
-    var user = await GetCurrentUserAsync();
-
-    var placeholer = user.Bio;
+    <div class="row mt-2 pt-2">
 
 
-    <form asp-controller="Account" asp-action="Manage">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
 
-        <input placeholder="@placeholer" asp-for="Bio" />
-        <div class="form-group mt-2 ml-0">
-            <button type="Submit" class="btn btn-primary">Güncelle</button>
-        </div>
+            var user = await GetCurrentUserAsync();
 
-    </form>
+            var placeholer = user.Bio;
 
-}
 
-<form asp-controller="Account" asp-action="UploadImage" enctype="multipart/form-data">
 
-    <div class="form-group row">
-        <label asp-for="ImageFile" class="col-sm-2 col-form-label"></label>
-        <div class="col-sm-10">
-            <div class="custom-file">
-                <input asp-for="ImageFile" class="form-control custom-file-input">
-                <label class="custom-file-label">Choose File...</label>
-            </div>
-            <div class="form-group mt-2 ml-0">
-                <button type="Submit" class="btn btn-primary">Yükle</button>
-            </div>
-        </div>
+            <form asp-controller="Account" asp-action="Manage">
+
+                <input placeholder="@placeholer" class="col-12" asp-for="Bio" />
+                <div class="form-group mt-2 ml-0">
+                    <button type="Submit" class="btn btn-primary">Güncelle</button>
+                </div>
+
+            </form>
+
+        }
+
+
     </div>
-</form>
+
+    <div class="row">
+        <form asp-controller="Account" asp-action="UploadImage" enctype="multipart/form-data">
+
+            <div class="form-group row">
+                <label asp-for="ImageFile" class="col-12 col-form-label">Profil Fotoğrafı Yükle</label>
+                <div class="custom-file">
+                    <input asp-for="ImageFile" class="form-control custom-file-input">
+                    <label class="custom-file-label">Dosya Seç..</label>
+                </div>
+            </div>
+                
+
+                    <div class="form-group mt-2 ml-0">
+                        <button type="Submit" class="btn btn-primary">Yükle</button>
+                    </div>
+                
+           
+        </form>
+    </div>
+
+
 
 
 

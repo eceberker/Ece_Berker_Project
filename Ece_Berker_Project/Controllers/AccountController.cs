@@ -138,8 +138,8 @@ namespace Ece_Berker_Project.Controllers
                user = _userService.Update(user);
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction("index","yorums");
-                
+                return RedirectToAction("Details", "Profile", new { @id = user.UserCode });
+
             }
 
             return View(model);

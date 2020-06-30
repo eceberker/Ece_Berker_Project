@@ -38,10 +38,10 @@ namespace Ece_Berker_Project.Controllers
             var model = new ProfileViewModel()
             {
                 UserId = user.Id,
-               UserCode = user.UserCode,
-               Bio = user.Bio,
-
-               
+                UserCode = user.UserCode,
+                Bio = user.Bio,
+                PhotoPath = user.PhotoPath,
+                
             };
             return View(model);
 

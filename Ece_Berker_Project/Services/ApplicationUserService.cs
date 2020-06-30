@@ -26,6 +26,7 @@ namespace Ece_Berker_Project.Service
             return GetAll().FirstOrDefault(user => user.UserCode == id);
         }
 
+
         public YorumluoUser Update(YorumluoUser updatedUser)
         {
            YorumluoUser user =  GetAll().FirstOrDefault(user => user.Id == updatedUser.Id);
@@ -35,6 +36,7 @@ namespace Ece_Berker_Project.Service
             }
             return user;
         }
+        
 
 
     }

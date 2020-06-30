@@ -1,38 +1,5 @@
 ﻿@model Ece_Berker_Project.ViewModel.LoginViewModel
-@{
-    ViewBag.Title = "Kullanıcı Girişi";
 
-}
-
-    <style>
-        html {
-            background: url('../../img/bg.png') no-repeat center center fixed;
-            background-size: cover;
-            color: #000;
-        }
-
-        body {
-            background: transparent;
-        }
-
-        div.row {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 30px;
-            padding: 10px;
-            margin: 10px;
-        }
-
-        img {
-            max-width: 100%;
-        }
-
-        .footer {
-            background-color: rgba(255, 255, 255, 0.8);
-            color: #000;
-            margin-top: 10px;
-        }
-    </style>
-<h1>Kullanıcı Girişi</h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -56,7 +23,7 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Giriş Yap</button>
+            <button type="submit" asp-controller="Account" asp-action="Login" class="btn btn-primary">Giriş Yap</button>
         </form>
     </div>
 </div>

@@ -20,10 +20,12 @@ namespace Ece_Berker_Project.ViewComponents
             _context = context;
             _userService = userService;
         }
-        public async Task<IViewComponentResult> InvokeAsync(string id)
+        public async Task<IViewComponentResult> InvokeAsync(string id, string url)
         {
             YorumluoUser user = _userService.GetById(id);
+            url = user.PhotoPath;
             var yors = await _context.Yorums.Where(y=>y.UserName == user.UserCode).Include(y=>y.Category).OrderByDescending(p => p.PostDate).ToListAsync();
+            
             return View(yors);
         }
     }

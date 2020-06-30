@@ -29,11 +29,11 @@
                 </a>
                 <a class="nav-link text-light" asp-controller="yorums" asp-action="index">Anasayfa</a>
                 <a class="nav-link text-light" asp-controller="Profile" asp-action="Details" asp-route-id="@user.UserCode">Profilim</a>
-                <a class="nav-link text-light"  asp-controller="Categories" asp-action="index">Kategoriler</a>
+                
                 <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbar5">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse float-none" id="navbar5">
+                <div class="navbar-collapse collapse float-right pl-5 pr-5 " id="navbar5">
 
                     @Html.Partial("_SearchPartial", new Ece_Berker_Project.ViewModel.SearchViewModel())
                 </div>

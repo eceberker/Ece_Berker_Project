@@ -10,14 +10,15 @@
     Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
 
     var user = await GetCurrentUserAsync();
-    var imageUrl = user.PhotoPath;
+  
+    var url = Model.PhotoPath;
    
 }
-
+  
 <div class="row mb-2 mt-5">
     <div class="col-md-12 rounded">
         <div class="card flex-md-row mb-4 box-shadow h-md-250 rounded">
-            <img class="card-img-right flex-auto d-none d-md-block" data-src="~/img/@imageUrl" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="~/img/@imageUrl" data-holder-rendered="true">
+            <img class="card-img-right flex-auto d-none d-md-block" data-src="~/img/@url" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="~/img/@url" data-holder-rendered="true">
             <div class="card-body d-flex flex-column align-items-start">
 
                 <h3 class="mb-0">
@@ -45,6 +46,6 @@
 </div>
 <table class="table">
     <tbody>
-        @await Component.InvokeAsync("YorumViewComponent", Model.UserCode)
+        @await Component.InvokeAsync("YorumViewComponent", new {id = Model.UserCode, url=Model.PhotoPath })
     </tbody>
 </table>

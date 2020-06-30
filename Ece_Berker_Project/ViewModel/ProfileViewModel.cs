@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Ece_Berker_Project.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace Ece_Berker_Project.ViewModel
         public string Bio { get; set; }
         public string City { get; set; }
         public IFormFile ImageFile { get; set; }
-        public List<Models.Yorum> Yorumlar { get; set; }
+        public string PhotoPath { get; set; }
+        public Yorum Yorumlar { get; set; }
     }
 }
