@@ -1,5 +1,6 @@
 ﻿using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
+using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,11 +23,19 @@ namespace Ece_Berker_Project.ViewComponents
         }
         public async Task<IViewComponentResult> InvokeAsync(string id)
         {
+
+
             YorumluoUser user = _userService.GetById(id);
+
+
+            var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
+                  .OrderByDescending(p => p.PostDate).ToListAsync();
             
-            var yors = await _context.Yorums.Where(y=>y.UserName == user.UserCode).Include(y=>y.Category).Include(y=>y.User).ThenInclude(u=>u.PhotoPath).OrderByDescending(p => p.PostDate).ToListAsync();
-            
+
+            // var results = await yors.Include(y => y.User).ThenInclude(u => u.ProfileImages).ToListAsync();
+
             return View(yors);
+   
         }
     }
 }

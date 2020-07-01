@@ -9,6 +9,7 @@ namespace Ece_Berker_Project.ViewModel
 {
     public class ProfileViewModel
     {
+        public YorumluoUser User { get; set; }
         public string UserId { get; set; }
         public string UserCode { get; set; }
         public string Bio { get; set; }

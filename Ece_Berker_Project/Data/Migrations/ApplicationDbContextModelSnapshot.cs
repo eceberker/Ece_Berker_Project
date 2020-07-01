@@ -68,15 +68,12 @@ namespace Ece_Berker_Project.Data.Migrations
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("ProfileImages");
                 });
@@ -344,7 +341,7 @@ namespace Ece_Berker_Project.Data.Migrations
                 {
                     b.HasOne("Ece_Berker_Project.Models.YorumluoUser", "User")
                         .WithMany("ProfileImages")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Ece_Berker_Project.Models.Yorum", b =>

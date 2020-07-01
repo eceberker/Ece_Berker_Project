@@ -33,14 +33,19 @@ namespace Ece_Berker_Project.Controllers
 
         public IActionResult Details(string id)
         {
+            
+
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             YorumluoUser user = _userService.GetById(id);
             var model = new ProfileViewModel()
             {
-                UserId = user.Id,
+
+                User = user,
+            /*    UserId = user.Id,
                 UserCode = user.UserCode,
                 Bio = user.Bio,
-                PhotoPath = user.PhotoPath,
+                PhotoPath = user.PhotoPath,*/
+               
                 
             };
             return View(model);
