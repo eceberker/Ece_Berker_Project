@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ece_Berker_Project.Data.Migrations
+namespace Ece_Berker_Project.Migrations
 {
-    public partial class UserTableUpdated : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,17 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Ece_Berker_Project.Data.Migrations
+namespace Ece_Berker_Project.Migrations
 {
-    public partial class UserModelAdded : Migration
+    public partial class inital : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
 
-        }
 
+
+
+
+
+        }
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+          
         }
     }
 }

@@ -22,20 +22,26 @@ namespace Ece_Berker_Project.ViewComponents
             _userService = userService;
         }
         public async Task<IViewComponentResult> InvokeAsync(string id)
+
         {
 
-
             YorumluoUser user = _userService.GetById(id);
+            if (id != null)
+            {
+             
 
 
-            var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
-                  .OrderByDescending(p => p.PostDate).ToListAsync();
-            
+                var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
+                      .OrderByDescending(p => p.PostDate).ToListAsync();
 
-            // var results = await yors.Include(y => y.User).ThenInclude(u => u.ProfileImages).ToListAsync();
+                return View(yors);
 
-            return View(yors);
-   
+            }
+            var yors1 = await _context.Yorums.Include(y => y.User).Include(y => y.Category)
+                      .OrderByDescending(p => p.PostDate).ToListAsync();
+            return View(yors1);
+
+
         }
     }
 }

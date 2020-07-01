@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Ece_Berker_Project.Data;
-using Ece_Berker_Project.Data.Migrations;
 using Ece_Berker_Project.Models;
 using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -152,7 +147,7 @@ namespace Ece_Berker_Project.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage (ProfileViewModel model)
+        public async Task<IActionResult> UploadImage(ProfileViewModel model)
         {
             var user = await userManager.GetUserAsync(User);
             if (model.ImageFile != null)
@@ -163,17 +158,17 @@ namespace Ece_Berker_Project.Controllers
                 string filePath = Path.Combine(uploadsFolder, uniqueFileName);
                 model.ImageFile.CopyTo(new FileStream(filePath, FileMode.Create));
                 user.PhotoPath = uniqueFileName;
-              
+
 
             }
             ProfileImage profileImage = new ProfileImage();
-            
+
             profileImage.User = user;
             profileImage.FileName = user.PhotoPath;
             _context.ProfileImages.Add(profileImage);
             await _context.SaveChangesAsync();
 
-           
+
             return RedirectToAction("Details", "Profile", new { @id = user.UserCode });
         }
     }
