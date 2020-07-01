@@ -67,12 +67,7 @@ namespace Ece_Berker_Project.Controllers
         public async Task<IActionResult> Create([Bind("Id,Title,UserName,Likes,CategoryId,PostDate,User")] Yorum yorum)
         {
             Task<YorumluoUser> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
-
             
-
-     
-            
-
             if (ModelState.IsValid)
             {
                 var user = await GetCurrentUserAsync();

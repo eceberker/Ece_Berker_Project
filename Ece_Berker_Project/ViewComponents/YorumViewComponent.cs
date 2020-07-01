@@ -30,7 +30,6 @@ namespace Ece_Berker_Project.ViewComponents
             {
              
 
-
                 var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
                       .OrderByDescending(p => p.PostDate).ToListAsync();
 

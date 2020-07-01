@@ -6,11 +6,14 @@
     }
 
     .category-name {
-        margin-right: 10px;
+        margin-right: 15px;
     }
 
     .user-comment {
-        font-size: 10pt;
+        font-size: 11pt;
+    }
+    .user-name {
+        font-size: 11pt;
     }
 </style>
 
@@ -31,9 +34,9 @@
         @foreach (var item in Model)
         {
         <div class="media text-muted pt-3">
-                <img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/@item.User.PhotoPath" data-holder-rendered="true">
+                <img alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/@item.User.PhotoPath" data-holder-rendered="true">
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                  <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> <strong class="d-block text-gray-dark">@item.UserName</strong></a>
+                  <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> <strong class="d-block text-gray-dark user-name">@item.UserName</strong></a>
                     <span class="badge badge-primary category-name">@item.Category.Name</span>
                     <span class="user-comment">
                         @item.Title
@@ -47,7 +50,7 @@
 
                         if (user.UserCode == item.UserName)
                         {
-                            <a class="float-right" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a class="float-right border border-light rounded bg-light"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
                         }
                     }
