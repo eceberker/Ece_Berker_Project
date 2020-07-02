@@ -42,10 +42,10 @@ namespace Ece_Berker_Project.Controllers
 
                 SearchViewModel results = new SearchViewModel
                 {
-                    Results = _yorumService.Search(model?.SearchText, model?.CategoryId, model?.Username).ToList(),
+                    Results =  _yorumService.Search(model?.SearchText, model?.CategoryId, model?.Username).ToList(),
                 };
 
-                return View(results);
+                return  View(results);
 
         }
 

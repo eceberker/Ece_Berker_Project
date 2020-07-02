@@ -30,14 +30,14 @@ namespace Ece_Berker_Project.Controllers
         // GET: Yorums
         public async Task<IActionResult> Index()
         {
+           ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+           var yorum = _yorumService.GetAll();
+           return View(yorum);
 
-            var yorum = _yorumService.GetAll();
-            return View(yorum);
 
-            /* ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-             var applicationDbContext = _context.Yorums.Include(y => y.Category).Include(u=>u.User).OrderByDescending(p=>p.PostDate);
-             return View(await applicationDbContext.ToListAsync());*/
-            
+           /* var applicationDbContext = _context.Yorums.Include(y => y.Category).Include(u=>u.User).OrderByDescending(p=>p.PostDate);
+            return View(await applicationDbContext.ToListAsync());*/
+
         }
 
         // GET: Yorums/Details/5

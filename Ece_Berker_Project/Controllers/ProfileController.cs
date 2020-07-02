@@ -18,6 +18,7 @@ namespace Ece_Berker_Project.Controllers
         private readonly UserManager<YorumluoUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IApplicationUser _userService;
+        
 
 
 
@@ -29,6 +30,7 @@ namespace Ece_Berker_Project.Controllers
             _context = context;
             _userManager = userManager;
             _userService = userService;
+           
         }
 
         public IActionResult Details(string id)
@@ -39,7 +41,7 @@ namespace Ece_Berker_Project.Controllers
             YorumluoUser user = _userService.GetById(id);
             var model = new ProfileViewModel()
             {
-
+               
                 User = user,
             /*    UserId = user.Id,
                 UserCode = user.UserCode,

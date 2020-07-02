@@ -12,6 +12,8 @@ namespace Ece_Berker_Project.Data
         IEnumerable<Yorum> GetAll();
         IEnumerable<Yorum> Search(string SearchText, int? CategoryId, string UserName);
 
+        IEnumerable<Yorum> Profile(string id);
 
+        Task Add(Yorum yorum);
     }
 }

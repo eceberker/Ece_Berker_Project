@@ -16,29 +16,33 @@ namespace Ece_Berker_Project.ViewComponents
        
         private readonly ApplicationDbContext _context;
         private readonly IApplicationUser _userService;
-        public YorumViewComponent (ApplicationDbContext context, IApplicationUser userService)
+        private readonly IYorum _yorumService;
+        public YorumViewComponent (ApplicationDbContext context, IApplicationUser userService, IYorum yorumService)
         {
             _context = context;
             _userService = userService;
+            _yorumService = yorumService;
         }
         public async Task<IViewComponentResult> InvokeAsync(string id)
 
         {
 
-            YorumluoUser user = _userService.GetById(id);
-            if (id != null)
-            {
-             
+           // YorumluoUser user = _userService.GetById(id);
+           // if (id != null)
+            //{
 
-                var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
-                      .OrderByDescending(p => p.PostDate).ToListAsync();
+                var yors = _yorumService.Profile(id);
+                /* var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
+                       .OrderByDescending(p => p.PostDate).ToListAsync();
 
-                return View(yors);
+                 return View(yors);*/
+                return View (yors);
 
-            }
-            var yors1 = await _context.Yorums.Include(y => y.User).Include(y => y.Category)
-                      .OrderByDescending(p => p.PostDate).ToListAsync();
-            return View(yors1);
+          //  }
+                
+          //  var yors1 = await _context.Yorums.Include(y => y.User).Include(y => y.Category)
+            //          .OrderByDescending(p => p.PostDate).ToListAsync();
+          //  return View(yors1);
 
 
         }
