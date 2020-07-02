@@ -9,6 +9,7 @@ using Ece_Berker_Project.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Ece_Berker_Project.ViewModel;
+using Ece_Berker_Project.Services;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -16,19 +17,26 @@ namespace Ece_Berker_Project.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<YorumluoUser> _userManager;
-        public YorumsController(UserManager<YorumluoUser> userManager, ApplicationDbContext context)
+        private readonly IYorum _yorumService;
+        public YorumsController(UserManager<YorumluoUser> userManager, 
+            ApplicationDbContext context,
+            IYorum yorumService)
         {
             _userManager = userManager;
             _context = context;
+            _yorumService = yorumService;
         }
 
         // GET: Yorums
         public async Task<IActionResult> Index()
         {
 
-                ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-              var applicationDbContext = _context.Yorums.Include(y => y.Category).Include(u=>u.User).OrderByDescending(p=>p.PostDate);
-             return View(await applicationDbContext.ToListAsync());
+            var yorum = _yorumService.GetAll();
+            return View(yorum);
+
+            /* ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+             var applicationDbContext = _context.Yorums.Include(y => y.Category).Include(u=>u.User).OrderByDescending(p=>p.PostDate);
+             return View(await applicationDbContext.ToListAsync());*/
             
         }
 

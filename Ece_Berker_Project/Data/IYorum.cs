@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Ece_Berker_Project.Data
 {
-    interface IYorum
+   public interface IYorum
     {
-        Task Post(Yorum yorum);
+        Yorum GetById(int id);
+        IEnumerable<Yorum> GetAll();
+        IEnumerable<Yorum> Search(string SearchText, int? CategoryId, string UserName);
+
+
     }
 }
