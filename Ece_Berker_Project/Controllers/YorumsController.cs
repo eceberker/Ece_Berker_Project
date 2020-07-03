@@ -87,14 +87,16 @@ namespace Ece_Berker_Project.Controllers
                     PostDate = DateTime.Now,
                     User = user,
                 };
-
-                _context.Add(yor);
-                await _context.SaveChangesAsync();
+               await _yorumService.Add(yor);
+               // _context.Add(yor);
+               // await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", yorum.CategoryId);
             return View(yorum);
         }
+
+
 
         // GET: Yorums/Edit/5
         [Authorize]

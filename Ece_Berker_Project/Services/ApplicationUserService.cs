@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace Ece_Berker_Project.Service
 {
@@ -26,6 +28,23 @@ namespace Ece_Berker_Project.Service
             return GetAll().FirstOrDefault(user => user.UserCode == id);
         }
 
+        public async Task Like(UserLikes yorum)
+        {
+            if (_context.UserLikes.Any(y => y.YorumId == yorum.YorumId && y.UserId == yorum.UserId))
+            {
+                // var IsExist = true;
+                
+
+            }
+            _context.UserLikes.Add(yorum);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Unlike(UserLikes yorum)
+        {
+            _context.UserLikes.Remove(yorum);
+            await _context.SaveChangesAsync();
+        }
 
         public YorumluoUser Update(YorumluoUser updatedUser)
         {

@@ -36,7 +36,7 @@
         <div class="media text-muted pt-3">
                 <img alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/@item.User.PhotoPath" data-holder-rendered="true">
                 <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                  <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> <strong class="d-block text-gray-dark user-name">@item.UserName</strong></a>
+                    <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> <strong class="d-block text-gray-dark user-name">@item.UserName</strong></a>
                     <span class="badge badge-primary category-name">@item.Category.Name</span>
                     <span class="user-comment">
                         @item.Title
@@ -45,12 +45,15 @@
                         @item.PostDate
                     </span>
 
+                    
+                    <a class="float-right border border-light rounded bg-light" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id">Like</a>
+                    <a class="float-right border border-light rounded bg-light" asp-controller="Account" asp-action="Unlike" asp-route-id="@item.Id">Unike</a>
                     @if (SignInManager.IsSignedIn(User))
                     {
 
                         if (user.UserCode == item.UserName)
                         {
-                            <a class="float-right border border-light rounded bg-light"  asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a class="float-right border border-light rounded bg-light" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
 
                         }
                     }

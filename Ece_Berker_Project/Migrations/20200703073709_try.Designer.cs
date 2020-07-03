@@ -4,14 +4,16 @@ using Ece_Berker_Project.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Ece_Berker_Project.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200703073709_try")]
+    partial class @try
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,21 +78,6 @@ namespace Ece_Berker_Project.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ProfileImages");
-                });
-
-            modelBuilder.Entity("Ece_Berker_Project.Models.UserLikes", b =>
-                {
-                    b.Property<int>("YorumId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("YorumId", "UserId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserLikes");
                 });
 
             modelBuilder.Entity("Ece_Berker_Project.Models.Yorum", b =>
@@ -357,21 +344,6 @@ namespace Ece_Berker_Project.Migrations
                     b.HasOne("Ece_Berker_Project.Models.YorumluoUser", "User")
                         .WithMany("ProfileImages")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Ece_Berker_Project.Models.UserLikes", b =>
-                {
-                    b.HasOne("Ece_Berker_Project.Models.YorumluoUser", "LikeUsers")
-                        .WithMany("LikedYorum")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Ece_Berker_Project.Models.Yorum", "LikedYorums")
-                        .WithMany("LikedUser")
-                        .HasForeignKey("YorumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Ece_Berker_Project.Models.Yorum", b =>

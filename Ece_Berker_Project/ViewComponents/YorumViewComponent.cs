@@ -30,7 +30,7 @@ namespace Ece_Berker_Project.ViewComponents
            // YorumluoUser user = _userService.GetById(id);
            // if (id != null)
             //{
-
+            
                 var yors = _yorumService.Profile(id);
                 /* var yors = await _context.Yorums.Where(y => y.User.Id == user.Id).Include(y => y.User).Include(y => y.Category)
                        .OrderByDescending(p => p.PostDate).ToListAsync();

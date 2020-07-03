@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
@@ -117,7 +118,7 @@ namespace Ece_Berker_Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Manage(ProfileViewModel model)
         {
-            var user = await userManager.GetUserAsync(User);
+           // var user = await userManager.GetUserAsync(User);
             return View(model);
         }
         [HttpPost]
@@ -170,6 +171,37 @@ namespace Ece_Berker_Project.Controllers
 
 
             return RedirectToAction("Details", "Profile", new { @id = user.UserCode });
+        }
+        public async Task<IActionResult> Like(Yorum model)
+        {
+
+            var user = await userManager.GetUserAsync(User);
+
+            UserLikes like = new UserLikes();
+
+            like.YorumId = model.Id;
+            like.UserId = user.Id;
+
+           // ViewData["Exists"] = _context.UserLikes.Any(y => y.YorumId == model.Id && y.UserId == model.User.Id);
+
+            await _userService.Like(like);
+
+            return RedirectToAction("Index","Yorums");
+
+        }
+
+        public async Task<IActionResult> Unlike(Yorum model)
+        {
+            var user = await userManager.GetUserAsync(User);
+            UserLikes like = new UserLikes();
+
+            like.YorumId = model.Id;
+            like.UserId = user.Id;
+
+
+            await _userService.Unlike(like);
+
+            return RedirectToAction("Index", "Yorums");
         }
     }
 }

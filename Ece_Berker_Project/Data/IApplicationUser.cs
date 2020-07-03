@@ -13,6 +13,10 @@ namespace Ece_Berker_Project.Data
         YorumluoUser GetById(string id);
         IEnumerable<YorumluoUser> GetAll();
         YorumluoUser Update(YorumluoUser updatedUser);
+
+        Task Like(UserLikes yorum);
+
+        Task Unlike(UserLikes yorum);
       
             
     }

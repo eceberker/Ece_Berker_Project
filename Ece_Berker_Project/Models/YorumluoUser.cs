@@ -17,5 +17,7 @@ namespace Ece_Berker_Project.Models
         public string PhotoPath { get; set; }
         public virtual List<ProfileImage> ProfileImages { get; set; }
         public virtual List<Yorum> Yorums { get; set; }
+        public List<UserLikes> LikedYorum { get; set; }
+
     }
 }

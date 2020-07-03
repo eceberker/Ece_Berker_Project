@@ -17,9 +17,10 @@ namespace Ece_Berker_Project.Services
             _context = context;
         }
 
-        public Task Add(Yorum yorum)
+        public async Task Add(Yorum yorum)
         {
-            throw new NotImplementedException();
+            _context.Add(yorum);
+            await _context.SaveChangesAsync();
         }
 
         public IEnumerable<Yorum> GetAll()
@@ -34,22 +35,18 @@ namespace Ece_Berker_Project.Services
 
         public IEnumerable<Yorum> Profile(string id)
         {
-            var yorum = _context.Yorums.Include(c => c.Category).AsQueryable().OrderByDescending(p => p.PostDate);
+            //var yorum = GetAll().AsQueryable();
 
             if (id != null)
             {
-                yorum = _context.Yorums.Where(y => y.User.UserCode == id).Include(y => y.User).Include(y => y.Category)
-             .OrderByDescending(p => p.PostDate);
-
-                
+               return GetAll().Where(y => y.User.UserCode == id);
             }
             else
             {
-                yorum =  _context.Yorums.Include(y => y.User).Include(y => y.Category)
-                .OrderByDescending(p => p.PostDate);
+                return GetAll();
                 
             }
-            return yorum;
+           // return yorum;
         }
 
         public IEnumerable<Yorum> Search(string SearchText, int? CategoryId, string Username)
@@ -59,7 +56,8 @@ namespace Ece_Berker_Project.Services
         
             if (!String.IsNullOrWhiteSpace(SearchText))
              {
-             yorum = yorum.Where(y=>y.Title.Contains(SearchText)).Include(y => y.User).OrderByDescending(p => p.PostDate);
+             yorum = yorum.Where(y=>y.Title.Contains(SearchText)
+             || y.UserName.Contains(SearchText)).Include(y => y.User).OrderByDescending(p => p.PostDate);
              }
       
            
