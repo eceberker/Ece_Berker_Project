@@ -82,6 +82,23 @@ namespace Ece_Berker_Project.Controllers
 
             return View(model);
         }
+
+
+
+        public JsonResult CheckUsernameAvailability (string userdata)
+        {
+         //   System.Threading.Thread.Sleep(100);
+            var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == userdata).SingleOrDefault();
+            if (SearchData != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
+        }
+
         [HttpGet]
         public IActionResult Login()
         {
