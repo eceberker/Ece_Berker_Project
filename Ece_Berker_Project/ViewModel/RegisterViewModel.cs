@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Ece_Berker_Project.ViewModel
@@ -13,8 +15,10 @@ namespace Ece_Berker_Project.ViewModel
         [Display(Name = "E-Mail:")]
         public string Email { get; set; }
 
+
         [Required]
         [Display(Name = "Kullanıcı Adı:")]
+ 
         public string UserCode { get; set; }
 
 

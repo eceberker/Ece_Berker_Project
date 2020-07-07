@@ -44,8 +44,8 @@
                     <span class="float-right">
                         @item.PostDate
                     </span>
-
-                    
+                    <input type="hidden" id="YorumId"/>
+                    <p id="Status"></p>
                     <a class="float-right border border-light rounded bg-light" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id">Like</a>
                     <a class="float-right border border-light rounded bg-light" asp-controller="Account" asp-action="Unlike" asp-route-id="@item.Id">Unike</a>
                     @if (SignInManager.IsSignedIn(User))
@@ -64,3 +64,22 @@
         }
     </div>
 </main>
+<script>
+    function LikeCheck() {
+
+        $.post("@Url.Action("CheckLikedBefore", "Account")"),
+        {
+            
+            yorumId: $("#YorumId").val()
+        },
+            function (data) {
+                if (data == 0) {
+                    $("#Status").html('Kullanıcı Adı kullanılabilir.');
+
+                }
+                else {
+                    $("#Status").html('Bu kullanıcı adına sahip bir kullanıcı var.');
+                }
+            });
+    }
+</script>

@@ -84,19 +84,32 @@ namespace Ece_Berker_Project.Controllers
         }
 
 
+         [HttpPost]
+         public JsonResult CheckUsernameAvailability (string UserCode)
+         {
+          //   System.Threading.Thread.Sleep(100);
+             var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == UserCode).SingleOrDefault();
+             if (SearchData != null)
+             {
+                 return Json(1);
+             }
+             else
+             {
+                 return Json(0);
+             }
+         }
+        
 
-        public JsonResult CheckUsernameAvailability (string userdata)
+        [AcceptVerbs("GET", "POST")]
+        public IActionResult VeryfyUsername(string UserCode)
         {
-         //   System.Threading.Thread.Sleep(100);
-            var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == userdata).SingleOrDefault();
-            if (SearchData != null)
+            var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == UserCode).SingleOrDefault();
+            if(SearchData != null)
             {
-                return Json(1);
+                return Json($"{UserCode} is already in use.");
             }
-            else
-            {
-                return Json(0);
-            }
+
+            return Json(true);
         }
 
         [HttpGet]
@@ -188,6 +201,26 @@ namespace Ece_Berker_Project.Controllers
 
 
             return RedirectToAction("Details", "Profile", new { @id = user.UserCode });
+        }
+
+
+
+
+
+        [HttpPost]
+        public async Task <JsonResult> CheckLikedBefore(int yorumId)
+        {
+            //   System.Threading.Thread.Sleep(100);
+            var user = await userManager.GetUserAsync(User);
+            var SearchData = _context.UserLikes.Where(y => y.YorumId == yorumId && y.UserId == user.Id).SingleOrDefault();
+            if (SearchData != null)
+            {
+                return Json(1);
+            }
+            else
+            {
+                return Json(0);
+            }
         }
         public async Task<IActionResult> Like(Yorum model)
         {
