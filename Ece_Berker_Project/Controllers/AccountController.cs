@@ -87,7 +87,7 @@ namespace Ece_Berker_Project.Controllers
          [HttpPost]
          public JsonResult CheckUsernameAvailability (string UserCode)
          {
-          //   System.Threading.Thread.Sleep(100);
+
              var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == UserCode).SingleOrDefault();
              if (SearchData != null)
              {
@@ -100,17 +100,7 @@ namespace Ece_Berker_Project.Controllers
          }
         
 
-        [AcceptVerbs("GET", "POST")]
-        public IActionResult VeryfyUsername(string UserCode)
-        {
-            var SearchData = _context.YorumluoUsers.Where(x => x.UserCode == UserCode).SingleOrDefault();
-            if(SearchData != null)
-            {
-                return Json($"{UserCode} is already in use.");
-            }
 
-            return Json(true);
-        }
 
         [HttpGet]
         public IActionResult Login()
@@ -170,6 +160,8 @@ namespace Ece_Berker_Project.Controllers
 
             return View(model);
         }
+
+
         [HttpGet]
        public async Task<IActionResult> UploadImage()
         {
@@ -207,12 +199,12 @@ namespace Ece_Berker_Project.Controllers
 
 
 
-        [HttpPost]
-        public async Task <JsonResult> CheckLikedBefore(int yorumId)
+        
+        public async Task <JsonResult> CheckLikedBefore(int YorumId)
         {
-            //   System.Threading.Thread.Sleep(100);
+           
             var user = await userManager.GetUserAsync(User);
-            var SearchData = _context.UserLikes.Where(y => y.YorumId == yorumId && y.UserId == user.Id).SingleOrDefault();
+            var SearchData = _context.UserLikes.Where(y => y.YorumId == YorumId && y.UserId == user.Id).SingleOrDefault();
             if (SearchData != null)
             {
                 return Json(1);
@@ -222,6 +214,8 @@ namespace Ece_Berker_Project.Controllers
                 return Json(0);
             }
         }
+
+
         public async Task<IActionResult> Like(Yorum model)
         {
 
