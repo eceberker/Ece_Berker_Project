@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
@@ -8,7 +10,8 @@ using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.AspNetCore.Razor.Language;
+using Newtonsoft.Json;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -200,19 +203,24 @@ namespace Ece_Berker_Project.Controllers
 
 
         
-        public async Task <JsonResult> CheckLikedBefore(int YorumId)
+        public async Task<IActionResult> CheckLikedBefore(int YorumId)
         {
-           
+            //   System.Threading.Thread.Sleep(100);
             var user = await userManager.GetUserAsync(User);
-            var SearchData = _context.UserLikes.Where(y => y.YorumId == YorumId && y.UserId == user.Id).SingleOrDefault();
-            if (SearchData != null)
-            {
-                return Json(1);
-            }
-            else
-            {
-                return Json(0);
-            }
+            
+           
+                var SearchData = _context.UserLikes.Where(y => y.YorumId == YorumId && y.UserId == user.Id).SingleOrDefault();
+                if (SearchData != null)
+                {
+                    return Json(1);
+                }
+                else
+                {
+                    return Json(0);
+                }
+
+          
+
         }
 
 

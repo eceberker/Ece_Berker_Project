@@ -36,7 +36,7 @@
         <div class="my-3 p-3 bg-white rounded box-shadow">
             @foreach (var item in Model)
             {
-                <div class="media text-muted pt-3" onload="LikeCheck()">
+                <div class="media text-muted pt-3" id="myForm">
                     <img alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="~/img/@item.User.PhotoPath" data-holder-rendered="true">
                     <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
                         <a asp-controller="Profile" asp-action="Details" asp-route-id="@item.UserName"> <strong class="d-block text-gray-dark user-name">@item.UserName</strong></a>
@@ -69,58 +69,42 @@
     </main>
     <script type="text/javascript">
         $(document).ready(function () {
-
-            var YorumIds = document.getElementsByClassName("YorumId");
-            var values = [];
-           
-            for (var i = 0; i < YorumIds.length; i++) {
-                values[i] = YorumIds[i].value;
-
-                alert(values[i])
-                YorumId = values[i];
-                $.ajax({
-                    url: "/Account/CheckLikedBefore",
-                    type: "GET",
-                    dataType: "json",
-                    data: { YorumId: YorumId },
-                    success: function (data) {
-
-                        if (data == 0)
-                            $("#Unlike").hide();
-                        else if (data == 1)
-                            $("#Like").hide();
-
-                    }
-
-                });
-
-
+            var ids = document.getElementsByClassName("YorumId");
+            var YorumId = [];
+            for (var i = 0; i < ids.length; i++) {
+                YorumId.push(ids[i].value);
 
             }
-        });
 
-    </script>
+            console.log(YorumId);
 
-    <script type="text/javascript">
-        $(document).ready(function () {
+            $(function (){
+                $.each(YorumId, function (i, value) {
 
-            YorumId = $("#YorumId").val()
-            $.ajax({
-                url: "/Account/CheckLikedBefore",
-                type: "GET",
-                dataType: "json",
-                data: { YorumId: YorumId },
-                success: function (data) {
+                    $.ajax({
+                       
+                        traditional: true,
+                        url: "/Account/CheckLikedBefore",
+                        type: "GET",
+                        dataType: "json",
+                        data: { YorumId: YorumId },
+                        success: function (data) {
 
-                    if (data == 0)
-                        $("#Unlike").hide();
-                    else if (data == 1)
-                        $("#Like").hide();
-
-                }
-
+                            if (data == 0)
+                                $("#Unlike").hide();
+                            else if (data == 1)
+                                $("#Like").hide();
+                        }
+                    });
+                });
             });
-        });
 
+
+
+
+
+                   
+        });
+              
     </script>
 </body>
