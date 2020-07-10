@@ -39,6 +39,7 @@ namespace Ece_Berker_Project
             services.AddRazorPages();
             services.AddScoped<IApplicationUser, ApplicationUserService>();
             services.AddScoped<IYorum, YorumService>();
+            services.AddScoped<ILike, LikeService>();
 
             services.Configure<IdentityOptions>(options =>
             {

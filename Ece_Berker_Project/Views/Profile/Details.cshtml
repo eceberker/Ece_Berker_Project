@@ -10,12 +10,12 @@
     Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
 
     var user = await GetCurrentUserAsync();
-  
+
     var url = Model.User.PhotoPath;
 
 
 }
-  
+
 <div class="row mb-2 mt-5">
     <div class="col-md-12 rounded">
         <div class="card flex-md-row mb-4 box-shadow h-md-250 rounded">
@@ -43,10 +43,17 @@
             @Html.Partial("_NewYorum", new Ece_Berker_Project.Models.Yorum())
         }
     }
+ 
 
 </div>
 <table class="table">
-    <tbody>
-        @await Component.InvokeAsync("YorumViewComponent", new {id = Model.User.UserCode })
+
+    <tbody id="PageList">
+        <a class="border-bottom border-gray pb-2 mb-0" id="yo">Son Yorumlar</a>
+        @await Component.InvokeAsync("YorumViewComponent", new { id = Model.User.UserCode })
+
+        <a class="border-bottom border-gray pb-2 mb-0" id="li">Beğeniler</a>
+        @await Component.InvokeAsync("ProfileLikeViewComponent", new { id = Model.User.Id })
     </tbody>
 </table>
+

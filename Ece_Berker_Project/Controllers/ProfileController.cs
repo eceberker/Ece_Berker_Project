@@ -43,11 +43,7 @@ namespace Ece_Berker_Project.Controllers
             {
                
                 User = user,
-            /*    UserId = user.Id,
-                UserCode = user.UserCode,
-                Bio = user.Bio,
-                PhotoPath = user.PhotoPath,*/
-               
+
                 
             };
             return View(model);

@@ -30,12 +30,7 @@ namespace Ece_Berker_Project.Service
 
         public async Task Like(UserLikes yorum)
         {
-            if (_context.UserLikes.Any(y => y.YorumId == yorum.YorumId && y.UserId == yorum.UserId))
-            {
-                // var IsExist = true;
-                
 
-            }
             _context.UserLikes.Add(yorum);
             await _context.SaveChangesAsync();
         }

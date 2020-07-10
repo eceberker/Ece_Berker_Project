@@ -35,7 +35,7 @@ namespace Ece_Berker_Project.Services
 
         public IEnumerable<Yorum> Profile(string id)
         {
-            //var yorum = GetAll().AsQueryable();
+         
 
             if (id != null)
             {
@@ -46,7 +46,7 @@ namespace Ece_Berker_Project.Services
                 return GetAll();
                 
             }
-           // return yorum;
+        
         }
 
         public IEnumerable<Yorum> Search(string SearchText, int? CategoryId, string Username)

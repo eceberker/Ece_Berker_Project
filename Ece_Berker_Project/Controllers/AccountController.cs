@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.Language;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace Ece_Berker_Project.Controllers
@@ -208,7 +209,7 @@ namespace Ece_Berker_Project.Controllers
             //   System.Threading.Thread.Sleep(100);
             var user = await userManager.GetUserAsync(User);
             
-           
+
                 var SearchData = _context.UserLikes.Where(y => y.YorumId == YorumId && y.UserId == user.Id).SingleOrDefault();
                 if (SearchData != null)
                 {
@@ -219,7 +220,9 @@ namespace Ece_Berker_Project.Controllers
                     return Json(0);
                 }
 
-          
+
+
+
 
         }
 
@@ -234,26 +237,25 @@ namespace Ece_Berker_Project.Controllers
             like.YorumId = model.Id;
             like.UserId = user.Id;
 
-           // ViewData["Exists"] = _context.UserLikes.Any(y => y.YorumId == model.Id && y.UserId == model.User.Id);
 
-            await _userService.Like(like);
+           var SearchData = _context.UserLikes.AsNoTracking().Where(y => y.YorumId == model.Id && y.UserId == user.Id).SingleOrDefault();
+            
+            if (SearchData != null)
+            {
+                await _userService.Unlike(like);
+               
+            }
+            else
+            {
+                await _userService.Like(like);
+                
+            }
+
+            
 
             return RedirectToAction("Index","Yorums");
 
         }
 
-        public async Task<IActionResult> Unlike(Yorum model)
-        {
-            var user = await userManager.GetUserAsync(User);
-            UserLikes like = new UserLikes();
-
-            like.YorumId = model.Id;
-            like.UserId = user.Id;
-
-
-            await _userService.Unlike(like);
-
-            return RedirectToAction("Index", "Yorums");
-        }
     }
 }

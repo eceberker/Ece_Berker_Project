@@ -23,7 +23,7 @@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.js" type="text/javascript"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js" type="text/javascript"></script>
 </head>
-<h6 class="border-bottom border-gray pb-2 mb-0">Son Yorumlar</h6>
+
 
 @{
     Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
@@ -49,14 +49,14 @@
                         </span>
                         <input type="hidden" class="YorumId" value="@item.Id" id="YorumId" />
                         <p id="Status"></p>
-                        <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id">Like</a>
-                        <a class="float-right border border-light rounded bg-light" id="Unlike" asp-controller="Account" asp-action="Unlike" asp-route-id="@item.Id">Unike</a>
+                        <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id">Beğen</a>
+                       
                         @if (SignInManager.IsSignedIn(User))
                         {
 
                             if (user.UserCode == item.UserName)
                             {
-                                <a class="float-right border border-light rounded bg-light" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                                <a class="float-right border border-light rounded bg-light" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
 
                             }
                         }
@@ -78,33 +78,31 @@
 
             console.log(YorumId);
 
-            $(function (){
-                $.each(YorumId, function (i, value) {
 
-                    $.ajax({
-                       
-                        traditional: true,
-                        url: "/Account/CheckLikedBefore",
-                        type: "GET",
-                        dataType: "json",
-                        data: { YorumId: YorumId },
-                        success: function (data) {
+            $.each(YorumId, function (index, value) {
 
-                            if (data == 0)
-                                $("#Unlike").hide();
-                            else if (data == 1)
-                                $("#Like").hide();
-                        }
-                    });
+                $.ajax({
+
+                    traditional: true,
+                    async: true,
+                    url: "/Account/CheckLikedBefore",
+                    type: "GET",
+                    dataType: "json",
+                    data: { YorumId: value },
+                    success: function (data) {
+
+                        if (data == 0)
+                            $("#Like").html('Beğen');
+                        else if (data == 1)
+                            $("#Like").html('Beğenmeni Geri Al');
+                    }
                 });
+
             });
 
 
 
-
-
-                   
         });
-              
+
     </script>
 </body>
