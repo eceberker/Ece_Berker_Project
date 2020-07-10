@@ -19,7 +19,7 @@
 <div class="row mb-2 mt-5">
     <div class="col-md-12 rounded">
         <div class="card flex-md-row mb-4 box-shadow h-md-250 rounded">
-            <img class="card-img-right flex-auto d-none d-md-block" data-src="~/img/@url" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="~/img/@Model.User.PhotoPath" data-holder-rendered="true">
+            <img class="card-img-right flex-auto d-none d-md-block" data-src="~/img/nopp.jpg" alt="Thumbnail [200x250]" style="width: 200px; height: 250px;" src="~/img/@Model.User.PhotoPath" data-holder-rendered="true">
             <div class="card-body d-flex flex-column align-items-start">
 
                 <h3 class="mb-0">
@@ -43,17 +43,18 @@
             @Html.Partial("_NewYorum", new Ece_Berker_Project.Models.Yorum())
         }
     }
- 
+
 
 </div>
-<table class="table">
-
-    <tbody id="PageList">
-        <a class="border-bottom border-gray pb-2 mb-0" id="yo">Son Yorumlar</a>
-        @await Component.InvokeAsync("YorumViewComponent", new { id = Model.User.UserCode })
-
-        <a class="border-bottom border-gray pb-2 mb-0" id="li">Beğeniler</a>
-        @await Component.InvokeAsync("ProfileLikeViewComponent", new { id = Model.User.Id })
-    </tbody>
-</table>
-
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Yorumlar</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Beğeniler</a>
+        
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">@await Component.InvokeAsync("YorumViewComponent", new { id = Model.User.UserCode })</div>
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">@await Component.InvokeAsync("ProfileLikeViewComponent", new { id = Model.User.Id })</div>
+    
+</div>

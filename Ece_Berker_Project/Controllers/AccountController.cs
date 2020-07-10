@@ -202,11 +202,11 @@ namespace Ece_Berker_Project.Controllers
 
 
 
-
+        [HttpGet]
         
         public async Task<IActionResult> CheckLikedBefore(int YorumId)
         {
-            //   System.Threading.Thread.Sleep(100);
+            
             var user = await userManager.GetUserAsync(User);
             
 

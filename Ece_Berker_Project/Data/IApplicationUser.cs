@@ -17,6 +17,8 @@ namespace Ece_Berker_Project.Data
         Task Like(UserLikes yorum);
 
         Task Unlike(UserLikes yorum);
+
+        
       
             
     }

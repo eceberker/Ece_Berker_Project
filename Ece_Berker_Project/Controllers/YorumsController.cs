@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Ece_Berker_Project.ViewModel;
 using Ece_Berker_Project.Services;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -30,15 +31,15 @@ namespace Ece_Berker_Project.Controllers
         // GET: Yorums
         public async Task<IActionResult> Index()
         {
+
            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-           var yorum = _yorumService.GetAll();
+           var yorum =  _yorumService.GetAll();
            return View(yorum);
 
 
-           /* var applicationDbContext = _context.Yorums.Include(y => y.Category).Include(u=>u.User).OrderByDescending(p=>p.PostDate);
-            return View(await applicationDbContext.ToListAsync());*/
-
         }
+
+
 
         // GET: Yorums/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -87,9 +88,9 @@ namespace Ece_Berker_Project.Controllers
                     PostDate = DateTime.Now,
                     User = user,
                 };
-               await _yorumService.Add(yor);
-               // _context.Add(yor);
-               // await _context.SaveChangesAsync();
+              
+                await _yorumService.Add(yor);
+
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name", yorum.CategoryId);

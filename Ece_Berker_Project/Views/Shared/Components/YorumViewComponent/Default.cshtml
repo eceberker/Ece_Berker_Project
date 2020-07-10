@@ -67,42 +67,4 @@
             }
         </div>
     </main>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var ids = document.getElementsByClassName("YorumId");
-            var YorumId = [];
-            for (var i = 0; i < ids.length; i++) {
-                YorumId.push(ids[i].value);
-
-            }
-
-            console.log(YorumId);
-
-
-            $.each(YorumId, function (index, value) {
-
-                $.ajax({
-
-                    traditional: true,
-                    async: true,
-                    url: "/Account/CheckLikedBefore",
-                    type: "GET",
-                    dataType: "json",
-                    data: { YorumId: value },
-                    success: function (data) {
-
-                        if (data == 0)
-                            $("#Like").html('Beğen');
-                        else if (data == 1)
-                            $("#Like").html('Beğenmeni Geri Al');
-                    }
-                });
-
-            });
-
-
-
-        });
-
-    </script>
 </body>
