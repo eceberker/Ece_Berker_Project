@@ -19,30 +19,56 @@ namespace Ece_Berker_Project.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<YorumluoUser> _userManager;
         private readonly IYorum _yorumService;
+        private readonly ILike _likeService;
         public YorumsController(UserManager<YorumluoUser> userManager, 
             ApplicationDbContext context,
-            IYorum yorumService)
+            IYorum yorumService,
+            ILike likeService)
         {
             _userManager = userManager;
             _context = context;
             _yorumService = yorumService;
+            _likeService = likeService;
         }
 
         // GET: Yorums
+
+
         public async Task<IActionResult> Index()
         {
 
-           ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
-           var yorum =  _yorumService.GetAll();
-           return View(yorum);
+            Task<YorumluoUser> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
+            var user = await GetCurrentUserAsync();
+
+       
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+
+            var yorumlar = _yorumService.GetAll();
+            var userLikes = _likeService.GetUserLikesForIndex(user.Id);
 
 
+  
+
+
+
+            foreach (var item in yorumlar)
+            {
+
+               
+                    if (userLikes.Any(u=>u.YorumId == item.Id))
+                    {
+                        item.IsLiked = true;
+                    }else
+                    {
+                        item.IsLiked = false;
+                    }
+                
+            }
+            return View(yorumlar);
         }
 
-
-
-        // GET: Yorums/Details/5
-        public async Task<IActionResult> Details(int? id)
+            // GET: Yorums/Details/5
+            public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -59,6 +85,7 @@ namespace Ece_Berker_Project.Controllers
 
             return View(yorum);
         }
+
         [Authorize]
         // GET: Yorums/Create
         public IActionResult Create()
@@ -187,9 +214,18 @@ namespace Ece_Berker_Project.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Delete1(int id)
+        {
+            var yorum = await _context.Yorums.FindAsync(id);
+            _context.Yorums.Remove(yorum);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         private bool YorumExists(int id)
         {
             return _context.Yorums.Any(e => e.Id == id);
         }
     }
+
 }

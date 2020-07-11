@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -24,6 +25,9 @@ namespace Ece_Berker_Project.Models
         public virtual List<Answer> Answers { get; set; }
         public virtual YorumluoUser User { get; set; }
         public List<UserLikes> LikedUser { get; set; }
+
+        [NotMapped]
+        public bool IsLiked { get; set; }
         public Yorum()
         {
             PostDate = DateTime.Now;

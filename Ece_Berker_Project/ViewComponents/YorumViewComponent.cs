@@ -27,10 +27,9 @@ namespace Ece_Berker_Project.ViewComponents
 
         {
 
-                var yors =  _yorumService.Profile(id);
+            var yors = _yorumService.Profile(id);
 
-                return View (yors);
-
+            return View(yors);
 
         }
     }

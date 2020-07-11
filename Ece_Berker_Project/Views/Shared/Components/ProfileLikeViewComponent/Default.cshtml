@@ -49,17 +49,8 @@
                             </span>
                             <input type="hidden" class="YorumId" value="@item.YorumId" id="YorumId" />
                             <p id="Status"></p>
-                            <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.YorumId">Beğen</a>
+                            <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.YorumId"><img src="~/img/favorite.png" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">  Beğeniyi Geri Al</a>
 
-                            @if (SignInManager.IsSignedIn(User))
-                            {
-
-                                if (user.Id == item.UserId)
-                                {
-                                    <a class="float-right border border-light rounded bg-light" asp-action="Delete" asp-route-id="@item.LikedYorums.Id">Sil</a>
-
-                                }
-                            }
 
                         </div>
 

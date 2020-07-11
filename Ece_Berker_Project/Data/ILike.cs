@@ -10,5 +10,6 @@ namespace Ece_Berker_Project.Data
     {
         IEnumerable<UserLikes> GetAll();
         IEnumerable<UserLikes> GetUserLikes(string userId);
+        IEnumerable<UserLikes> GetUserLikesForIndex(string userId);
     }
 }

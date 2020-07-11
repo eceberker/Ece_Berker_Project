@@ -23,7 +23,13 @@ namespace Ece_Berker_Project.Services
 
         public IEnumerable<UserLikes> GetUserLikes(string userId)
         {
-            return GetAll().Where(y => y.UserId == userId).OrderByDescending(p => p.LikedYorums.PostDate); 
+            return GetAll().Where(y => y.UserId == userId).OrderByDescending(p => p.LikedYorums.PostDate);
+            
+        }
+
+        public IEnumerable<UserLikes> GetUserLikesForIndex(string userId)
+        {
+            return GetAll().Where(y => y.UserId == userId);
         }
     }
 }

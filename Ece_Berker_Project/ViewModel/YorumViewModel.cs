@@ -11,9 +11,10 @@ namespace Ece_Berker_Project.ViewModel
     {
 
         public int UserId { get; set; }
-        public IEnumerable <Yorum> Yorum { get; set; }
+        public Yorum Yorum { get; set; }
+        
         public bool IsLiked { get; set; }
-      
 
+        public IEnumerable<Yorum> Yorumlar { get; set; }
     }
 }
