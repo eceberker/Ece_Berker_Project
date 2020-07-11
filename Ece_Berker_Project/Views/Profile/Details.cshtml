@@ -28,8 +28,31 @@
 
                 <p class="card-text mb-auto">@Model.User.Bio</p>
 
-            </div>
+                @if (SignInManager.IsSignedIn(User))
+                {
 
+
+                    if (user.UserCode == Model.User.UserCode)
+                    {
+                        <a class="float-right btn disabled" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takip Et</a>
+                    }
+                    else
+                    {
+                        if (Model.User.IsFollowed != true)
+                        {
+                            <a class="float-right" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takip Et</a>
+                        }
+                        else
+                        {
+                            <a class="float-right" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takibi Bırak</a>
+                        }
+
+                    }
+
+                }
+
+            </div>
+            
         </div>
     </div>
 </div>

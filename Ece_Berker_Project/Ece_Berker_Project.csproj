@@ -10,6 +10,10 @@
     <Compile Remove="Data\Migrations\20200701074243_try.Designer.cs" />
     <Compile Remove="Migrations\20200703090246_userlike.cs" />
     <Compile Remove="Migrations\20200703090246_userlike.Designer.cs" />
+    <Compile Remove="Migrations\20200711183034_followmodel.cs" />
+    <Compile Remove="Migrations\20200711183034_followmodel.Designer.cs" />
+    <Compile Remove="Migrations\20200711184352_followmodel.cs" />
+    <Compile Remove="Migrations\20200711184352_followmodel.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

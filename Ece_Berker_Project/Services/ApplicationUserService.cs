@@ -19,6 +19,13 @@ namespace Ece_Berker_Project.Service
         {
             _context = context;
         }
+
+        public async Task Follow(Follow follow)
+        {
+            _context.Follows.Add(follow);
+            await _context.SaveChangesAsync();
+        }
+
         public IEnumerable<YorumluoUser> GetAll()
         {
             return _context.Users;
@@ -28,10 +35,21 @@ namespace Ece_Berker_Project.Service
             return GetAll().FirstOrDefault(user => user.UserCode == id);
         }
 
+        public IEnumerable<Follow> GetFollows(string id)
+        {
+            return _context.Follows.Where(y => y.FollowerId == id);
+        }
+
         public async Task Like(UserLikes yorum)
         {
 
             _context.UserLikes.Add(yorum);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Unfollow(Follow follow)
+        {
+            _context.Follows.Remove(follow);
             await _context.SaveChangesAsync();
         }
 

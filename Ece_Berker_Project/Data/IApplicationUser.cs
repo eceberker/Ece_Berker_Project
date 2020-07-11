@@ -14,11 +14,16 @@ namespace Ece_Berker_Project.Data
         IEnumerable<YorumluoUser> GetAll();
         YorumluoUser Update(YorumluoUser updatedUser);
 
+        IEnumerable<Follow> GetFollows(string id);
+
+
+
         Task Like(UserLikes yorum);
 
         Task Unlike(UserLikes yorum);
 
-        
+        Task Follow(Follow follow);
+        Task Unfollow(Follow follow);
       
             
     }

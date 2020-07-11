@@ -202,30 +202,6 @@ namespace Ece_Berker_Project.Controllers
 
 
 
-        [HttpGet]
-        
-        public async Task<IActionResult> CheckLikedBefore(int YorumId)
-        {
-            
-            var user = await userManager.GetUserAsync(User);
-            
-
-                var SearchData = _context.UserLikes.Where(y => y.YorumId == YorumId && y.UserId == user.Id).SingleOrDefault();
-                if (SearchData != null)
-                {
-                    return Json(1);
-                }
-                else
-                {
-                    return Json(0);
-                }
-
-
-
-
-
-        }
-
 
         public async Task<IActionResult> Like(Yorum model)
         {
@@ -256,6 +232,30 @@ namespace Ece_Berker_Project.Controllers
             return RedirectToAction("Index","Yorums");
 
         }
+
+        public async Task<IActionResult> Follow (YorumluoUser followed)
+        {
+            var user = await userManager.GetUserAsync(User);
+
+            Follow follow = new Follow();
+            follow.FollowerId = user.Id;
+            follow.FollowedId = followed.Id;
+
+            var check = _context.Follows.AsNoTracking().Where(y => y.FollowerId == follow.FollowerId && y.FollowedId == follow.FollowedId).SingleOrDefault();
+
+            if (check != null)
+            {
+                await _userService.Unfollow(follow);
+            }
+            else
+            {
+                await _userService.Follow(follow);
+            }
+            
+
+            return RedirectToAction("Index", "Yorums");
+        }
+
 
     }
 }

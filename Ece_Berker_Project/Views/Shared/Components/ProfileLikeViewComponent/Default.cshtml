@@ -44,9 +44,22 @@
                             <span class="user-comment">
                                 @item.LikedYorums.Title
                             </span>
+
                             <span class="float-right">
                                 @item.LikedYorums.PostDate
                             </span>
+                            @if (SignInManager.IsSignedIn(User))
+                            {
+
+                                if (user.Id == item.LikedYorums.User.Id)
+                                {
+
+                                    <a id="deleteCustomerModal" data-toggle="modal" data-target="#modal-delete" data-id="@item.YorumId" class="float-right border border-light rounded bg-light">
+                                        <i class="fa fa-trash-o"></i>
+                                        <img src="~/img/delete.png" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">
+                                    </a>
+                                }
+                            }
                             <input type="hidden" class="YorumId" value="@item.YorumId" id="YorumId" />
                             <p id="Status"></p>
                             <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.YorumId"><img src="~/img/favorite.png" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">  Beğeniyi Geri Al</a>

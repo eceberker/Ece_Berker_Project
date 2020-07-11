@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +19,13 @@ namespace Ece_Berker_Project.Models
         public virtual List<ProfileImage> ProfileImages { get; set; }
         public virtual List<Yorum> Yorums { get; set; }
         public List<UserLikes> LikedYorum { get; set; }
+
+        public List<Follow> Followers { get; set; }
+        public List<Follow> Follows { get; set; }
+
+        [NotMapped]
+        public bool IsFollowed { get; set; }
+
 
     }
 }

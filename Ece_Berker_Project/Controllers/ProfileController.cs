@@ -33,9 +33,10 @@ namespace Ece_Berker_Project.Controllers
            
         }
 
-        public IActionResult Details(string id)
+        public async Task<IActionResult> Details(string id)
         {
             
+
             
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             YorumluoUser user = _userService.GetById(id);
@@ -46,7 +47,31 @@ namespace Ece_Berker_Project.Controllers
 
                 
             };
-            ViewData["Profile"] = user.UserCode;
+
+
+
+            var loggeduser = await  _userManager.GetUserAsync(User);
+
+
+            var userFollows =  _userService.GetFollows(loggeduser.Id);
+
+
+
+            foreach (var users in userFollows)
+            {
+
+
+                if (userFollows.Any(u => u.FollowedId == user.Id))
+                {
+                    model.User.IsFollowed = true;
+                }
+                else
+                {
+                    model.User.IsFollowed = false;
+                }
+
+            }
+            
             return View(model);
 
         }

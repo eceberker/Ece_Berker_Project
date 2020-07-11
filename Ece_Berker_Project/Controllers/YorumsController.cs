@@ -47,9 +47,6 @@ namespace Ece_Berker_Project.Controllers
             var userLikes = _likeService.GetUserLikesForIndex(user.Id);
 
 
-  
-
-
 
             foreach (var item in yorumlar)
             {

@@ -13,6 +13,7 @@ namespace Ece_Berker_Project.Data
         public DbSet<YorumluoUser> YorumluoUsers { get; set; }
         public DbSet <ProfileImage> ProfileImages { get; set; }
         public DbSet <UserLikes> UserLikes { get; set; }
+        public DbSet<Follow> Follows { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -36,7 +37,21 @@ namespace Ece_Berker_Project.Data
                 .HasOne<Yorum>(sc => sc.LikedYorums)
                 .WithMany(s => s.LikedUser)
                 .HasForeignKey(sc => sc.YorumId);
+          
+            
+            modelBuilder.Entity<Follow>()
+                .HasKey(x => new { x.FollowerId, x.FollowedId });
 
+            modelBuilder.Entity<Follow>()
+                .HasOne(x => x.Follower)
+                .WithMany(y => y.Follows)
+                .HasForeignKey(y => y.FollowedId);
+
+            modelBuilder.Entity<Follow>()
+                .HasOne(x => x.Followed)
+                .WithMany(y => y.Followers)
+                .HasForeignKey(y => y.FollowerId);
+                
 
         }
     }
