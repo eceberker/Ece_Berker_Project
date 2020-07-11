@@ -52,6 +52,15 @@
                 <span class="float-right">
                     @item.PostDate
                 </span>
+                @if (item.IsLiked != true)
+                {
+
+                    <a class="float-right border border-gray rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id"><img src="~/img/emptylike.png" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">  Beğen</a>
+                }
+                else
+                {
+                    <a class="float-right border border-light rounded bg-light" id="Like" asp-controller="Account" asp-action="Like" asp-route-id="@item.Id"><img src="~/img/favorite.png" width="20" height="20" class="d-inline-block align-top" alt="" loading="lazy">  Beğeniyi Geri Al</a>
+                }
                 @if (SignInManager.IsSignedIn(User))
                 {
                     Task<YorumluoUser> GetCurrentUserAsync() => UserManager.GetUserAsync(User);
@@ -60,7 +69,7 @@
 
                     if (user.UserCode == item.UserName)
                     {
-                        <a class="float-right" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <a class="float-right" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
 
 
                     }

@@ -3,7 +3,7 @@
 @inject UserManager<YorumluoUser> UserManager
 @inject SignInManager<YorumluoUser> SignInManager
 @{
-    ViewData["Title"] = "Details";
+    <title>@Model.UserCode</title>
 
 }
 @{
@@ -50,11 +50,11 @@
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Yorumlar</a>
         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Beğeniler</a>
-        
+
     </div>
 </nav>
 <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">@await Component.InvokeAsync("YorumViewComponent", new { id = Model.User.UserCode })</div>
     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">@await Component.InvokeAsync("ProfileLikeViewComponent", new { id = Model.User.Id })</div>
-    
+
 </div>

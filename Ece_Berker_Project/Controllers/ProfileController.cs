@@ -36,7 +36,7 @@ namespace Ece_Berker_Project.Controllers
         public IActionResult Details(string id)
         {
             
-
+            
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
             YorumluoUser user = _userService.GetById(id);
             var model = new ProfileViewModel()
@@ -46,6 +46,7 @@ namespace Ece_Berker_Project.Controllers
 
                 
             };
+            ViewData["Profile"] = user.UserCode;
             return View(model);
 
         }
