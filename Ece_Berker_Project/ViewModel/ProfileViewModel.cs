@@ -17,5 +17,7 @@ namespace Ece_Berker_Project.ViewModel
         public IFormFile ImageFile { get; set; }
         public string PhotoPath { get; set; }
         public Yorum Yorumlar { get; set; }
+        public int? FollowerCount { get; set; }
+        public int? FollowedCount { get; set; }
     }
 }

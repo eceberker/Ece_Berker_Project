@@ -27,7 +27,8 @@
                 </h3>
 
                 <p class="card-text mb-auto">@Model.User.Bio</p>
-
+                <a class="small">@Model.FollowerCount Takipçi </a>
+                <a class="small">@Model.FollowedCount Takip Edilen </a>
                 @if (SignInManager.IsSignedIn(User))
                 {
 

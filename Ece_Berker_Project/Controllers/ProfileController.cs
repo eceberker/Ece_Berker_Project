@@ -18,19 +18,19 @@ namespace Ece_Berker_Project.Controllers
         private readonly UserManager<YorumluoUser> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IApplicationUser _userService;
-        
+        private readonly ILike _likeService;
 
 
 
         public ProfileController(UserManager<YorumluoUser> userManager,
             IApplicationUser userService, 
-            ApplicationDbContext context)
+            ApplicationDbContext context, ILike likeService)
         {
 
             _context = context;
             _userManager = userManager;
             _userService = userService;
-           
+            _likeService = likeService;
         }
 
         public async Task<IActionResult> Details(string id)
@@ -44,7 +44,7 @@ namespace Ece_Berker_Project.Controllers
             {
                
                 User = user,
-
+                
                 
             };
 
@@ -55,7 +55,8 @@ namespace Ece_Berker_Project.Controllers
 
             var userFollows =  _userService.GetFollows(loggeduser.Id);
 
-
+            model.FollowerCount = _context.Follows.Where(y => y.FollowedId == user.Id).Count();
+            model.FollowedCount = _context.Follows.Where(y => y.FollowerId == user.Id).Count();
 
             foreach (var users in userFollows)
             {
@@ -71,12 +72,11 @@ namespace Ece_Berker_Project.Controllers
                 }
 
             }
-            
+
+
             return View(model);
 
         }
-
-
 
     }
 }
