@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Ece_Berker_Project.Data;
 using Ece_Berker_Project.Models;
@@ -10,9 +8,7 @@ using Ece_Berker_Project.ViewModel;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 
 namespace Ece_Berker_Project.Controllers
 {
@@ -56,7 +52,7 @@ namespace Ece_Berker_Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Copy data from RegisterViewModel to IdentityUser
+             
                 var user = new YorumluoUser
                 {
                     UserName = model.Email,
@@ -65,19 +61,17 @@ namespace Ece_Berker_Project.Controllers
                     Email = model.Email
                 };
 
-                // Store user data in AspNetUsers database table
+               
                 var result = await userManager.CreateAsync(user, model.Password);
 
-                // If user is successfully created, sign-in the user using
-                // SignInManager and redirect to index action of HomeController
+             
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("index", "yorums");
                 }
 
-                // If there are any errors, add them to the ModelState object
-                // which will be displayed by the validation summary tag helper
+              
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
@@ -128,8 +122,6 @@ namespace Ece_Berker_Project.Controllers
                     return RedirectToAction("index", "yorums");
                 }
 
-                // If there are any errors, add them to the ModelState object
-                // which will be displayed by the validation summary tag helper
 
                     ModelState.AddModelError(string.Empty, "Geçersiz kullanıcı adı ya da şifre.");
                 

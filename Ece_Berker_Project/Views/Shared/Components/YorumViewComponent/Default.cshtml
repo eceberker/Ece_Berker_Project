@@ -20,6 +20,10 @@
     .user-name {
         font-size: 11pt;
     }
+
+    .reply {
+        font-size:10pt;
+    }
 </style>
 
 <head>
@@ -65,6 +69,7 @@
                         <span class="float-right">
                             @item.PostDate
                         </span>
+
                         <input type="hidden" class="YorumId" value="@item.Id" id="YorumId" />
                         <p id="Status"></p>
                         @if (item.IsLiked != true)
@@ -79,7 +84,8 @@
 
 
 
-                        <!-- Modal -->
+
+                        <!-- Delete Modal -->
                         <form asp-controller="Yorums" asp-action="Delete1" role="form" id="myForm">
                             <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabel" aria-hidden="true">
                                 <div class="modal-dialog">
@@ -104,10 +110,6 @@
                         </form>
 
 
-
-
-
-
                     </div>
 
                 </div>
@@ -116,7 +118,9 @@
     </main>
 </body>
 <script>
-   
+
+
+
         $(function () {
             $('#modal-delete').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget);
@@ -126,10 +130,11 @@
                 modal.find('.modal-content input').val(id);
             });
 
-    $("#modalDeleteButton").click(function () {
-            $("#myForm").submit();
+            $("#modalDeleteButton").click(function () {
+                 $("#myForm").submit();
 
-    });
+                });
 
-});
+        });
+
 </script>

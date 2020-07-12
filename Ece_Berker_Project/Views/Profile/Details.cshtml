@@ -41,11 +41,11 @@
                     {
                         if (Model.User.IsFollowed != true)
                         {
-                            <a class="float-right" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takip Et</a>
+                            <a class="float-right bg-light" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takip Et</a>
                         }
                         else
                         {
-                            <a class="float-right" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takibi Bırak</a>
+                            <a class="float-right bg-light" asp-controller="Account" asp-action="Follow" asp-route-id="@Model.User.Id">Takibi Bırak</a>
                         }
 
                     }
